@@ -10,6 +10,7 @@
  * @param picture
  * @param price
  * @param quantity
+ * @param id
  */
 Yum.Product = (function( id, name, picture, price, quantity ) {
     this.id       = id;
@@ -56,7 +57,7 @@ function newSmoothie( id, name, picture, price, quantity, gluten ) {
  * @param picture
  * @param price
  * @param quantity
- * @returns {Product}
+ * @returns {Yum.Product}
  */
 function newMilkSmoothie( id, name, picture, price, quantity ) {
     var product = new Yum.Product( id, name, picture, price, quantity );
@@ -77,25 +78,96 @@ var ProductList = (function() {
     /**
      * addProduct
      * Storage method for adding items to the stock inventory
-     * @param {Product} product
+     * @param {Yum.Product} product
      */
     this.addProduct = function( product ) {
         this.products.push( product );
-    }
+    };
+
+    /**
+     * filterByCategory
+     * @param category
+     * @returns {Array}
+     */
+    this.filterByCategory = function( category ) {
+        var filter = [];
+        for( var i = 0; i < this.products.length; i++ ) {
+            if( this.products[i].category == category ) {
+                filter.push( this.products[i] );
+            }
+        }
+        return filter;
+    };
+
+    /**
+     * filterByGlutenFree
+     * @returns {Array}
+     */
+    this.filterByGlutenFree = function() {
+        var filter = [];
+        for( var i = 0; i < this.products.length; i++ ) {
+            if( !this.products[i].gluten ) {
+                filter.push( this.products[i] );
+            }
+        }
+        return filter;
+    };
+
+    /**
+     * filterByDairyFree
+     * @returns {Array}
+     */
+    this.filterByDairyFree = function() {
+        var filter = [];
+        for( var i = 0; i < this.products.length; i++ ) {
+            if( !this.products[i].dairy ) {
+                filter.push( this.products[i] );
+            }
+        }
+        return filter;
+    };
 
     /**
      * render
-     * Method to generate the contents of the basket for display
-     * @param category
-     * @param pageOptions
+     * @param {Array} stock
+     * @returns {string}
      */
-    this.renderStock = function( category, pageOptions ) {
+
+    this.render = function( stock ) {
         var product = '<ul>';
-        for (var i = 0; i < this.products.length; i++) {
-            product += '<li><span class="name">' + this.products[i].name + '</span><span class="quantity">' + this.products[i].quantity + '</span></li>';
+        for (var i = 0; i < stock.length; i++) {
+            product += '<li><span class="name">' + stock[i].name + '</span><span class="quantity">' + stock[i].quantity + '</span></li>';
         }
         product += '</ul>';
-        return basket;
+        return product;
+    };
+
+    /**
+     * renderCategoryStock
+     * Method to generate the contents of the basket for display
+     * @param category
+     */
+    this.renderCategoryStock = function( category ) {
+        var stock = this.filterByCategory( category );
+        return this.render( stock );
+    };
+
+    /**
+     * renderGlutenFreeStock
+     * Method to generate the contents of the basket for display
+     */
+    this.renderGlutenFreeStock = function() {
+        var stock = this.filterByGlutenFree();
+        return this.render( stock );
+    };
+
+    /**
+     * renderDairyFreeStock
+     * Method to generate the contents of the basket for display
+     */
+    this.renderDairyFreeStock = function() {
+        var stock = this.filterByDairyFree();
+        return this.render( stock );
     };
 });
 
