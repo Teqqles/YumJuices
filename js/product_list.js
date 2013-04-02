@@ -81,7 +81,7 @@ Yum.ProductList = (function() {
     this.render = function( stock ) {
         var product = '<ul>';
         for (var i = 0; i < stock.length; i++) {
-            product += '<li><span class="name">' + stock[i].name + '</span><span class="quantity">' + stock[i].quantity + '</span></li>';
+            product += '<li class="'  + stock[i].css + '"><span class="name">' + stock[i].name + '</span><span class="quantity">' + stock[i].quantity + '</span></li>';
         }
         product += '</ul>';
         return product;

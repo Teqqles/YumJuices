@@ -105,5 +105,48 @@ body {
     height: 150px;
     border: 1px solid black;
     margin: 6px;
+    padding-left: 105px;
+}
+
+/* Product Styles */
+
+.lime {
+    background: #fff url('../images/product/lime.jpg') no-repeat left top;
+}
+.apple {
+    background: #fff url('../images/product/apple.jpg') no-repeat left top;
+}
+.orange {
+    background: #fff url('../images/product/orange.jpg') no-repeat left top;
+}
+.lemon {
+    background: #fff url('../images/product/lemon.jpg') no-repeat left top;
+}
+.grapefruit  {
+    background: #fff url('../images/product/grapefruit.jpg') no-repeat left top;
+}
+.stawberrymilk  {
+    background: #fff url('../images/product/stawberrymilk.jpg') no-repeat left top;
+}
+.blueberrymilk  {
+    background: #fff url('../images/product/blueberrymilk.jpg') no-repeat left top;
+}
+.bananamilk   {
+    background: #fff url('../images/product/bananamilk.jpg') no-repeat left top;
+}
+.summerfruitsmilk {
+    background: #fff url('../images/product/summerfruitsmilk.jpg') no-repeat left top;
+}
+.stawberrybanana {
+    background: #fff url('../images/product/stawberrybanana.jpg') no-repeat left top;
+}
+.raspberrypie {
+    background: #fff url('../images/product/raspberrypie.jpg') no-repeat left top;
+}
+.blueberryraspberryblackberry {
+    background: #fff url('../images/product/blueberryraspberryblackberry.jpg') no-repeat left top;
+}
+.forestfruits {
+    background: #fff url('../images/product/forestfruits.jpg') no-repeat left top;
 }
 

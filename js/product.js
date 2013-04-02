@@ -17,15 +17,15 @@ var Yum = window.Yum || {};
  * @class Product
  * @constructor
  * @param name
- * @param picture
+ * @param css
  * @param price
  * @param quantity
  * @param id
  */
-Yum.Product = (function( id, name, picture, price, quantity ) {
+Yum.Product = (function( id, name, css, price, quantity ) {
     this.id       = id;
     this.name     = name;
-    this.picture  = picture;
+    this.css      = css;
     this.price    = price;
     this.quantity = quantity;
     this.crate = 6;
@@ -47,14 +47,14 @@ Yum.Product = (function( id, name, picture, price, quantity ) {
  * newSmoothie - factory function to create gluten/non-gluten non-dairy smoothies
  * @param id
  * @param name
- * @param picture
+ * @param css
  * @param price
  * @param quantity
  * @param gluten
  * @returns {Yum.Product}
  */
-function newSmoothie( id, name, picture, price, quantity, gluten ) {
-    var product = new Yum.Product( id, name, picture, price, quantity );
+function newSmoothie( id, name, css, price, quantity, gluten ) {
+    var product = new Yum.Product( id, name, css, price, quantity );
     product.gluten = gluten;
     product.category = 'smoothie';
     return product;
@@ -64,13 +64,13 @@ function newSmoothie( id, name, picture, price, quantity, gluten ) {
  * newMilkSmoothie - factory function to create gluten & dairy smoothies
  * @param id
  * @param name
- * @param picture
+ * @param css
  * @param price
  * @param quantity
  * @returns {Yum.Product}
  */
-function newMilkSmoothie( id, name, picture, price, quantity ) {
-    var product = new Yum.Product( id, name, picture, price, quantity );
+function newMilkSmoothie( id, name, css, price, quantity ) {
+    var product = new Yum.Product( id, name, css, price, quantity );
     product.gluten = true;
     product.dairy = true;
     product.category = 'smoothie';
