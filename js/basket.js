@@ -1,8 +1,3 @@
-/** namespace to product against third-party libraries for the Yum product
- * @namespace Yum
- */
-var Yum = window.Yum || {};
-
 /**
  * Basket
  *
@@ -11,41 +6,10 @@ var Yum = window.Yum || {};
  * Author: David Long (dlong06)
  **/
 
-/**
- * @name Product
- * Product type, encapsulation of Yum Juices products
- * @class Product
- * @constructor
- * @param id
- * @param name
- * @param picture
- * @param price
- * @param quantity
+/** namespace to product against third-party libraries for the Yum product
+ * @namespace Yum
  */
-Yum.Product = (function( id, name, picture, price, quantity ) {
-    this.id     = id;
-    this.name     = name;
-    this.picture  = picture;
-    this.price    = price;
-    this.quantity = quantity;
-    this.crate = 6;
-    this.category = 'juice';
-    this.gluten = false;
-    this.dairy = false;
-
-    this.addStock = function() {
-        this.quantity++;
-    }
-
-    this.removeStock = function() {
-        this.quantity--;
-    }
-});
-
-Yum.Item = (function() {
-    this.product_item_id = 0;
-    this.quantity = 0;
-});
+var Yum = window.Yum || {};
 
 /**
  * basket - encapsulation of the shopping basket
@@ -153,20 +117,4 @@ Yum.Basket = ( function() {
         return basket;
     };
 });
-
-basket = new Yum.Basket();
-
-test = new Yum.Product( 0, 'Test', 'null', 0.5, 1 );
-test2 = new Yum.Product( 1, 'Test', 'null', 0.5, 1 );
-
-basket.add( test );
-basket.add( test );
-basket.add( test2 );
-
-document.getElementById( 'basket' ).innerHTML = basket.render();
-
-
-
-
-
 

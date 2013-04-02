@@ -3,13 +3,32 @@
     <head>
         <title></title>
         <meta charset="utf-8" />
+        <link lang="text/css" rel="stylesheet" href="css/main.css" />
     </head>
     <body onload="renderPage()">
-    <div id="juice"></div>
-    <div id="smoothies"></div>
-    <div id="dairyfree"></div>
-    <div id="glutenfree"></div>
-    <div id="basket"></div>
-    <script type="text/javascript" src="js/basket.js"></script>
+        <div id="container">
+            <div id="banner">
+                <img id="logo" src="images/yum_logo.png" width="295" height="59" alt="Yum Juices Co." />
+                <img id="basket_icon" src="images/basket.png" width="39" height="41" alt="Basket" />
+            </div>
+            <div id="menu">
+                <ul>
+                    <li><a id="menu_juices" href="#" onclick="return false;">Juices</a></li>
+                    <li><a id="menu_smoothies" href="#" onclick="return false;">Smoothies</a></li>
+                    <li><a id="menu_dairy_free" href="#" onclick="return false;">Dairy-Free</a></li>
+                    <li><a id="menu_gluten_free" href="#" onclick="return false;">Gluten-Free</a></li>
+                </ul>
+            </div>
+            <div id="juices" class="product"></div>
+            <div id="smoothies" class="product"></div>
+            <div id="glutenfree" class="product"></div>
+            <div id="dairyfree" class="product"></div>
+            <div id="basket"></div>
+        </div>
+        <script type="text/javascript" src="js/item.js"></script>
+        <script type="text/javascript" src="js/product.js"></script>
+        <script type="text/javascript" src="js/product_list.js"></script>
+        <script type="text/javascript" src="js/basket.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>
