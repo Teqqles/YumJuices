@@ -81,10 +81,50 @@ Yum.ProductList = (function() {
     this.render = function( stock ) {
         var product = '<ul>';
         for (var i = 0; i < stock.length; i++) {
-            product += '<li class="'  + stock[i].css + '"><span class="name">' + stock[i].name + '</span><span class="quantity">' + stock[i].quantity + '</span></li>';
+            product += '<li class="'
+                    + stock[i].css
+                    + '"><h3 class="name">'
+                    + stock[i].name
+                    + '</h3>'
+                    + '<div class="price">Our Price: &pound;'
+                    + stock[i].price
+                    + '</div>'
+                    + this.renderStockLevel( stock[i].quantity )
+                    + this.renderBasketControls()
+                    + '</li>';
         }
         product += '</ul>';
         return product;
+    };
+
+    /**
+     * renderStockLevel
+     * @return {String}
+     * @param {Number} quantity
+     */
+
+    this.renderStockLevel = function( quantity ) {
+        var stock = '<div class="quantity'
+        /** no stock left **/
+        if ( quantity <= 0 ) {
+            stock +=  ' lowstock';
+        }
+        stock += '">';
+        if ( quantity <= 0 ) {
+            stock += 'Out of stock';
+        } else if( quantity < 10 ) {
+            stock += 'Only ' + quantity + ' left in stock';
+        } else {
+            stock += 'In stock.';
+        }
+        stock += '</div>';
+        return stock;
+    };
+
+    this.renderBasketControls = function () {
+        return '<div class="order"><span class="remove"><a href="#" onclick="return false;">-</a></span>'
+             + '<span class="item_order">0</span><span class="add"><a href="#" onclick="return false;">+</a></span>'
+             + ' <span class="add_to_basket"><a href="#" onclick="return false;">Add to Basket</a></span></div>';
     };
 
     /**

@@ -113,6 +113,7 @@ body {
 }
 
 .product ul li {
+    position: relative;
     float: left;
     display: block;
     width: 200px;
@@ -120,6 +121,44 @@ body {
     border: 1px solid #fae17f;
     margin: 6px;
     padding-left: 105px;
+}
+
+.product h3 {
+    color: #a057cf;
+    font-size: 1.2em;
+    font-weight: normal;
+    border-bottom: 1px solid #fcf5da;
+    margin-bottom: 5px;
+}
+
+.product .quantity {
+    color: #98b929;
+    font-weight: bold;
+}
+
+.product .lowstock {
+    color: #ff5f5a;
+}
+
+.product .order {
+    clear: both;
+    position: absolute;
+    bottom: 6px;
+    right: 0;
+}
+
+.product .order .remove, .product .order .add, .product .order .add_to_basket {
+    border: 1px solid #a057cf;
+    background-color: #fae17f;
+    font-size: 0.8em;
+    padding: 2px;
+    margin: 0 6px;
+}
+
+.product .order .remove a, .product .order .add a, .product .order .add_to_basket a {
+    color: #000;
+    text-decoration: none;
+    padding: 2px;
 }
 
 #sorter {
@@ -188,5 +227,12 @@ body {
 }
 .forestfruits {
     background: #fff url('../images/product/forestfruits.jpg') no-repeat left top;
+}
+
+#copyright {
+    clear: both;
+    margin: 10px;
+    text-align: center;
+    font-size: 0.7em;
 }
 
