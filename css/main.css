@@ -122,6 +122,28 @@ body {
     padding-left: 105px;
 }
 
+#sorter {
+    clear: both;
+    float: right;
+    font-size: 0.8em;
+}
+
+#sorter ul {
+    float: right;
+    list-style-type: none;
+}
+
+#sorter ul li {
+    float: left;
+    display: inline;
+    margin: 0 6px 6px 0;
+    padding-left: 10px;
+}
+
+#sorter ul li a {
+    color: #ff9168;
+}
+
 .clear {
     clear: both;
 }
