@@ -21,6 +21,15 @@
                     <li><a id="menu_gluten_free" href="#" onclick="return showPage( 'glutenfree_page' );">Gluten-Free</a></li>
                 </ul>
             </div>
+            <div id="sorter">
+                Order By:
+                <ul>
+                    <li><a id="sorter_name" href="#" onclick="return pageSorter( 'name' );">Name</a></li>
+                    <li><a id="sorter_popularity" href="#" onclick="return pageSorter( 'popularity' );">Popularity</a></li>
+                    <li><a id="sorter_highprice" href="#" onclick="return pageSorter( 'highprice' );">High Price</a></li>
+                    <li><a id="sorter_lowprice" href="#" onclick="return pageSorter( 'lowprice' );">Low Price</a></li>
+                </ul>
+            </div>
             <div id="home_page" class="page">
                 <h2>Home</h2>
                 <div id="home" class="product"></div>
@@ -60,6 +69,7 @@
         <script type="text/javascript" src="js/item.js"></script>
         <script type="text/javascript" src="js/product.js"></script>
         <script type="text/javascript" src="js/product_list.js"></script>
+        <script type="text/javascript" src="js/product_list_sorter.js"></script>
         <script type="text/javascript" src="js/basket.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
     </body>
