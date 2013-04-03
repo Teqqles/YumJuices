@@ -7,6 +7,8 @@ function renderPage() {
     var products = new Yum.ProductList();
     var basket = new Yum.Basket();
 
+    showPage( 'home_page' );
+
     /** juices **/
     products.addProduct( new Yum.Product( 0, 'Lime Juice', 'lime', 5.99, 50 ) );
     products.addProduct( new Yum.Product( 1, 'Apple Juice', 'apple', 5.99, 15 ) );
@@ -31,4 +33,23 @@ function renderPage() {
     document.getElementById( 'glutenfree' ).innerHTML = products.renderGlutenFreeStock();
     document.getElementById( 'dairyfree' ).innerHTML = products.renderDairyFreeStock();
 
+}
+
+function showPage( pageName ) {
+    var pages = [];
+    pages.push( 'home_page' );
+    pages.push( 'juices_page' );
+    pages.push( 'smoothies_page' );
+    pages.push( 'glutenfree_page' );
+    pages.push( 'dairyfree_page' );
+    pages.push( 'basket_page' );
+    pages.push( 'checkout_page' );
+
+    for( var i = 0; i< pages.length; i++ ) {
+        document.getElementById( pages[i] ).className = "page";
+    }
+
+    document.getElementById( pageName ).className = "page visible";
+
+    return false; //stop the hyperlink from redirecting to another page
 }
