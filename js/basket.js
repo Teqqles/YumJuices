@@ -27,27 +27,33 @@ Yum.Basket = ( function() {
      * add
      * Method for adding product to the basket.  Translates product to item and then stores in basket.
      * @param {Yum.Product} productItem
+     * @return {Boolean}
      */
     this.add = function( productItem ) {
         if ( productItem instanceof Yum.Product && productItem.quantity > 0 ) {
             var item = this.convertProductToItem( productItem );
             this.addItemToBasket( item );
             productItem.removeStock();
+            return true;
         }
+        return false;
     };
 
     /**
      * remove
      * Method for removing item, or quantity from the basket
      * @param {Yum.Product} productItem
+     * @return {Boolean}
      */
     this.remove = function( productItem ) {
         if ( productItem instanceof Yum.Product ) {
             var item = this.convertProductToItem( productItem );
             if ( this.removeItemFromBasket( item ) ) {
                 productItem.addStock();
+                return true;
             }
         }
+        return false;
     };
 
     /**
@@ -93,13 +99,33 @@ Yum.Basket = ( function() {
                 this.basketItems[i].quantity--;
                 if( this.basketItems[i].quantity <= 0 ) {
                     this.basketItems.pop( i );
-                    itemRemoved = true;
                 }
+                itemRemoved = true;
             }
         }
         return itemRemoved;
     };
 
+    /**
+     * getItemQuantity
+     * @param {Number} itemId
+     * @return {Number}
+     */
+    this.getItemQuantity = function( itemId ) {
+        for (var i = 0; i < this.basketItems.length; i++) {
+            if ( this.basketItems[i].product_item_id == itemId ) {
+                return this.basketItems[i].quantity;
+            }
+        }
+        return 0;
+    };
+
+    /**
+     * doItemsMatch
+     * @param item
+     * @param matchingItem
+     * @return {Boolean}
+     */
     this.doItemsMatch = function ( item, matchingItem ) {
         return matchingItem.product_item_id == item.product_item_id;
     };

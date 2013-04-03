@@ -9,11 +9,10 @@
  */
 var Yum = window.Yum || {};
 
-Yum.products = new Yum.ProductList();
 Yum.basket   = new Yum.Basket();
+Yum.products = new Yum.ProductList( Yum.basket );
 
 function renderPage() {
-
     showPage( 'home_page' );
 
     /** Setup our product database **/
@@ -86,4 +85,16 @@ function renderPageSections() {
     document.getElementById( 'smoothies' ).innerHTML = Yum.products.renderCategoryStock( 'smoothie' );
     document.getElementById( 'glutenfree' ).innerHTML = Yum.products.renderGlutenFreeStock();
     document.getElementById( 'dairyfree' ).innerHTML = Yum.products.renderDairyFreeStock();
+}
+
+function addToBasket( productId ) {
+    var product = Yum.products.getProduct( productId );
+    Yum.basket.add( product );
+    renderPageSections();
+}
+
+function removeFromBasket( productId ) {
+    var product = Yum.products.getProduct( productId );
+    Yum.basket.remove( product );
+    renderPageSections();
 }

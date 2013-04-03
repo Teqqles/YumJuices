@@ -15,9 +15,12 @@ var Yum = window.Yum || {};
  * ProductList
  * Stores details on all carried stock items
  * @class ProductList
+ * @constructor
+ * @param {Yum.Basket} basket
  */
-Yum.ProductList = (function() {
+Yum.ProductList = (function( basket ) {
     this.products = [];
+    this.basket = basket;
 
     /**
      * addProduct
@@ -26,6 +29,20 @@ Yum.ProductList = (function() {
      */
     this.addProduct = function( product ) {
         this.products.push( product );
+    };
+
+    /**
+     * getProduct
+     * @param productId
+     * @return {*}
+     */
+    this.getProduct = function( productId ) {
+        for( var i = 0; i < this.products.length; i++ ) {
+            if( this.products[i].id == productId ) {
+                return this.products[i];
+            }
+        }
+        return null;
     };
 
     /**
@@ -90,7 +107,7 @@ Yum.ProductList = (function() {
                     + stock[i].price
                     + '</div>'
                     + this.renderStockLevel( stock[i].quantity )
-                    + this.renderBasketControls()
+                    + this.renderBasketControls( stock[i].id )
                     + '</li>';
         }
         product += '</ul>';
@@ -121,10 +138,17 @@ Yum.ProductList = (function() {
         return stock;
     };
 
-    this.renderBasketControls = function () {
-        return '<div class="order"><span class="remove"><a href="#" onclick="return false;">-</a></span>'
-             + '<span class="item_order">0</span><span class="add"><a href="#" onclick="return false;">+</a></span>'
-             + ' <span class="add_to_basket"><a href="#" onclick="return false;">Add to Basket</a></span></div>';
+    /**
+     * renderBasketControls
+     * @param productId
+     * @return {String}
+     */
+    this.renderBasketControls = function ( productId ) {
+        return '<div class="order"><span class="remove"><a href="#" onclick="removeFromBasket( ' + productId + ' );return false;">-</a></span>'
+             + '<span class="item_order">'
+             + this.basket.getItemQuantity( productId )
+             + '</span><span class="add"><a href="#" onclick="addToBasket( ' + productId + ' );return false;">+</a></span>'
+             + ' <span class="add_to_basket"><a href="#" onclick="addToBasket( ' + productId + ' );return false;">Add to Basket</a></span></div>';
     };
 
     /**
