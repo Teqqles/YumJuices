@@ -164,6 +164,7 @@ body {
 #basket_content {
     background: #fae17f url('../images/basket_caption.png') no-repeat right center;
     padding-right: 65px;
+    width: 300px;
 }
 
 #basket_content div {
