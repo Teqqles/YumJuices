@@ -161,6 +161,17 @@ body {
     padding: 2px;
 }
 
+#basket_content {
+    background: #fae17f url('../images/basket_caption.png') no-repeat right center;
+    padding-right: 65px;
+}
+
+#basket_content div {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-right: 0;
+}
+
 #sorter {
     clear: both;
     float: right;
