@@ -11,7 +11,8 @@
  */
 var Yum = window.Yum || {};
 
-Yum.lastSort = 'name';
+//global string for keeping track of sorting to stop continuous resorting
+Yum.lastSort = 'popularity';
 
 /**
  * ProductListSorter

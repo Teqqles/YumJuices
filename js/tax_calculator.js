@@ -13,7 +13,7 @@ var Yum = window.Yum || {};
  * taxCalculator
  * @class
  */
-Yum.taxCalculator = (function() {
+Yum.TaxCalculator = (function() {
 
     /**
      * @type {number}

@@ -98,7 +98,7 @@ Yum.Basket = ( function() {
             if ( this.doItemsMatch( this.basketItems[i], item )  ) {
                 this.basketItems[i].quantity--;
                 if( this.basketItems[i].quantity <= 0 ) {
-                    this.basketItems.pop( i );
+                    this.basketItems.splice( i, 1 );
                 }
                 itemRemoved = true;
             }
@@ -128,6 +128,29 @@ Yum.Basket = ( function() {
      */
     this.doItemsMatch = function ( item, matchingItem ) {
         return matchingItem.product_item_id == item.product_item_id;
+    };
+
+    /**
+     * renderBubble
+     * @param {Yum.ProductList} productList
+     */
+    this.renderBubble = function( productList ) {
+        var price = 0.0;
+        var quantity = 0;
+        var bubble = '';
+        var taxCalculator = new Yum.TaxCalculator();
+        var discountCalculator = new Yum.DiscountCalculator();
+        for (var i = 0; i < this.basketItems.length; i++) {
+            price += discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
+            quantity += this.basketItems[i].quantity;
+        }
+        if ( quantity > 0 ) {
+            bubble += '<div id="basket_container">'
+                   + '<div id="basket_order">Order Total: £<span id="order_total">' + price.toFixed( 2 ) + '</span><span id="order_items"> ( ' + quantity + ' items )</span></div>'
+                   + '<span id="basket_message">Click the basket icon to view/order.</span>'
+                   + '</div>';
+        }
+        return bubble;
     };
 
     /**

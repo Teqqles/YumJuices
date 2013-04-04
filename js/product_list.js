@@ -11,6 +11,9 @@
  */
 var Yum = window.Yum || {};
 
+// static array for storing our homepage top products
+Yum.topProducts = [];
+
 /**
  * ProductList
  * Stores details on all carried stock items
@@ -76,6 +79,20 @@ Yum.ProductList = (function( basket ) {
     };
 
     /**
+     * filterTopSellers
+     * @param numberOfSellers
+     * @return {Array}
+     */
+    this.filterTopSellers = function( numberOfSellers ) {
+        if ( Yum.topProducts.length == 0 ) {
+            var productListSorter = new Yum.ProductListSorter( this.products.slice(0) );
+            var filter = productListSorter.popularity();
+            Yum.topProducts = filter.slice( 0, numberOfSellers );
+        }
+        return Yum.topProducts;
+    };
+
+    /**
      * filterByDairyFree
      * @returns {Array}
      */
@@ -107,6 +124,9 @@ Yum.ProductList = (function( basket ) {
                     + stock[i].price
                     + '</div>'
                     + this.renderStockLevel( stock[i].quantity )
+                    + '<div class="ingredients">Contains: '
+                    + stock[i].ingredients
+                    + '</div>'
                     + this.renderBasketControls( stock[i].id )
                     + '</li>';
         }
@@ -176,6 +196,15 @@ Yum.ProductList = (function( basket ) {
      */
     this.renderDairyFreeStock = function() {
         var stock = this.filterByDairyFree();
+        return this.render( stock );
+    };
+
+    /**
+     * renderTopSellers
+     * Method to generate the contents of the homepage top sellers for display
+     */
+    this.renderTopSellers = function() {
+        var stock = this.filterTopSellers( 3 );
         return this.render( stock );
     };
 });

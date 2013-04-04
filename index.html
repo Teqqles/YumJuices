@@ -11,13 +11,11 @@
                 <a id="menu_home" href="#" onclick="return showPage( 'home_page' );">
                     <img id="logo" src="images/yum_logo.png" width="295" height="59" alt="Yum Juices Co." />
                 </a>
-                <div id="basket_content">
-                    <div>
-                        <span id="basket_order"></span>
-                        <span id="basket_message">Your items have been added to the basket.  Click the basket icon to view.</span>
+                <a id="basket_link" href="#" onclick="return showPage( 'basket_page' );">
+                    <div id="basket_content">
                     </div>
-                </div>
-                <img id="basket_icon" src="images/basket.png" width="39" height="41" alt="Basket" />
+                    <img id="basket_icon" src="images/basket.png" width="39" height="41" alt="Basket" />
+                </a>
             </div>
             <div id="menu">
                 <ul>
@@ -37,32 +35,43 @@
                 </ul>
             </div>
             <div id="home_page" class="page">
-                <h2>Home</h2>
+                <div id="welcome" class="clear message">
+                    <strong>Welcome to Yum Juices.</strong>  Yum Juices is a young company that serves up delicious, nutritious, energising smoothies and juices.  We show you what goes into our juices so there are no nasty surprises.  You can also select sugar-free and additive-free options when you order.  A selection of our best selling juices and smoothies are shown below to get you started.
+                </div>
+                <h2>Our Top Products</h2>
                 <div id="home" class="product">
                 </div>
             </div>
             <div id="juices_page" class="page">
                 <h2>Juices</h2>
-
+                <div class="message">
+                    Our purest product, nothing but freshly squeezed juice, straight to your door.  We select only the finest ingredients and add a small amount of sweetener but if you'd rather have your juice without you can select that option when you checkout.
+                </div>
                 <div id="juices" class="product"></div>
             </div>
             <div id="smoothies_page" class="page">
                 <h2>Smoothies</h2>
-
+                <div class="message">
+                    Fresh fruit, mixed together, possibly with a splash of milk to create a thick smooth drink to enjoy for breakfast.
+                </div>
                 <div id="smoothies" class="product"></div>
             </div>
             <div id="glutenfree_page" class="page">
                 <h2>Gluten-Free</h2>
-
+                <div class="message">
+                    Have gluten allergies?  Or would you rather just do without?  This page provides only juices and smoothies which are free of gluten.
+                </div>
                 <div id="glutenfree" class="product"></div>
             </div>
             <div id="dairyfree_page" class="page">
                 <h2>Dairy-Free</h2>
-
+                <div class="message">
+                    Want your smoothies without milk?  This page only displays milk-free products so you can be safe in the knowledge that you will be ordering lactose free produce.
+                </div>
                 <div id="dairyfree" class="product"></div>
             </div>
             <div id="basket_page" class="page">
-                <h2>Basket</h2>
+                <h2>Shopping Basket</h2>
 
                 <div id="basket"></div>
             </div>
@@ -78,6 +87,8 @@
         <script type="text/javascript" src="js/product.js"></script>
         <script type="text/javascript" src="js/product_list.js"></script>
         <script type="text/javascript" src="js/product_list_sorter.js"></script>
+        <script type="text/javascript" src="js/tax_calculator.js"></script>
+        <script type="text/javascript" src="js/discount_calculator.js"></script>
         <script type="text/javascript" src="js/basket.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
     </body>

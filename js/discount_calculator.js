@@ -10,10 +10,10 @@
 var Yum = window.Yum || {};
 
 /**
- * discountCalculator
+ * DiscountCalculator
  * @class
  */
-Yum.discountCalculator = (function() {
+Yum.DiscountCalculator = (function() {
 
     /**
      * @type {number}
@@ -29,7 +29,7 @@ Yum.discountCalculator = (function() {
      */
     this.calculateDiscount = function( item, product ) {
         var price = 0.0;
-        price = item.quantity + product.price;
+        price = item.quantity * product.price;
         if ( item.quantity >= 5 ) {
             price = this.applyDiscount( price );
         }

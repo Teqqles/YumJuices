@@ -22,12 +22,13 @@ var Yum = window.Yum || {};
  * @param quantity
  * @param id
  */
-Yum.Product = (function( id, name, css, price, quantity ) {
+Yum.Product = (function( id, name, css, price, quantity, ingredients ) {
     this.id       = id;
     this.name     = name;
     this.css      = css;
     this.price    = price;
     this.quantity = quantity;
+    this.ingredients = ingredients;
     this.crate = 6;
     this.category = 'juice';
     this.gluten = false;
@@ -53,8 +54,8 @@ Yum.Product = (function( id, name, css, price, quantity ) {
  * @param gluten
  * @returns {Yum.Product}
  */
-function newSmoothie( id, name, css, price, quantity, gluten ) {
-    var product = new Yum.Product( id, name, css, price, quantity );
+function newSmoothie( id, name, css, price, quantity, gluten, ingredients ) {
+    var product = new Yum.Product( id, name, css, price, quantity, ingredients );
     product.gluten = gluten;
     product.category = 'smoothie';
     return product;
@@ -69,8 +70,8 @@ function newSmoothie( id, name, css, price, quantity, gluten ) {
  * @param quantity
  * @returns {Yum.Product}
  */
-function newMilkSmoothie( id, name, css, price, quantity ) {
-    var product = new Yum.Product( id, name, css, price, quantity );
+function newMilkSmoothie( id, name, css, price, quantity, ingredients ) {
+    var product = new Yum.Product( id, name, css, price, quantity, ingredients );
     product.gluten = true;
     product.dairy = true;
     product.category = 'smoothie';
