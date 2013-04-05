@@ -138,7 +138,6 @@ Yum.Basket = ( function() {
         var price = 0.0;
         var quantity = 0;
         var bubble = '';
-        var taxCalculator = new Yum.TaxCalculator();
         var discountCalculator = new Yum.DiscountCalculator();
         for (var i = 0; i < this.basketItems.length; i++) {
             price += discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
@@ -146,7 +145,9 @@ Yum.Basket = ( function() {
         }
         if ( quantity > 0 ) {
             bubble += '<div id="basket_container">'
-                   + '<div id="basket_order">Order Total: £<span id="order_total">' + price.toFixed( 2 ) + '</span><span id="order_items"> ( ' + quantity + ' items )</span></div>'
+                   + '<div id="basket_order">Order Total: &pound;<span id="order_total">' + price.toFixed( 2 ) + '</span><span id="order_items">'
+                   + quantity
+                   + '</span></div>'
                    + '<span id="basket_message">Click the basket icon to view/order.</span>'
                    + '</div>';
         }
@@ -156,11 +157,19 @@ Yum.Basket = ( function() {
     /**
      * render
      * Method to generate the contents of the basket for display
+     * @param {ProductList} productList
      */
-    this.render = function() {
+    this.render = function( productList ) {
         var basket = '<ul>';
         for (var i = 0; i < this.basketItems.length; i++) {
-            basket += '<li><span class="name">' + this.basketItems[i].product_item_id + '</span><span class="quantity">' + this.basketItems[i].quantity + '</span></li>';
+            var product = productList.getProduct( this.basketItems[i].product_item_id );
+            basket += '<li><span class="name">' + product.name + '</span><span class="quantity">'
+                   + '<div class="order"><span class="remove"><a href="#" onclick="removeFromBasket( ' + this.basketItems[i].product_item_id + ' );return false;">-</a></span>'
+                   + '<span class="item_order">'
+                   + this.getItemQuantity( this.basketItems[i].product_item_id )
+                   + '</span><span class="add"><a href="#" onclick="addToBasket( ' + this.basketItems[i].product_item_id + ' );return false;">+</a></span>'
+                   + '</span></div>'
+                   + '</span></li>';
         }
         basket += '</ul>';
         return basket;

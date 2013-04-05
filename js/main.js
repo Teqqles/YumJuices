@@ -90,7 +90,7 @@ function pageSorter( sortBy ) {
 }
 
 function renderPageSections() {
-    document.getElementById( 'basket' ).innerHTML = Yum.basket.render();
+    document.getElementById( 'basket' ).innerHTML = Yum.basket.render( Yum.products );
     document.getElementById( 'basket_content').innerHTML = Yum.basket.renderBubble( Yum.products );
     document.getElementById( 'juices' ).innerHTML = Yum.products.renderCategoryStock( 'juice' );
     document.getElementById( 'smoothies' ).innerHTML = Yum.products.renderCategoryStock( 'smoothie' );
