@@ -78,7 +78,18 @@
             <div id="checkout_page" class="page">
                 <h2>Checkout</h2>
 
-                <div id="checkout"></div>
+                <div id="checkout">
+                    <form>
+                        <label for="first_name">First Name</label><input id="first_name" name="first_name" type="text" />
+                        <label for="last_name">Last Name</label><input id="last_name" name="last_name" type="text" />
+                        <label for="email_address">Email Address</label><input id="email_address" name="email_address" type="text" />
+                        <label for="telephone">Last Name</label><input id="telephone" name="telephone" type="text" />
+                        <label for="billing_address">Billing Address</label><input id="billing_address" name="billing_address"  type="text" />
+                        <label for="shipping_address">Shipping Address</label><input id="shipping_address" name="shipping_address"  type="text" />
+                        <label for="credit_card_number">Credit Card Number</label><input id="credit_card_number" name="credit_card_number" type="text" />
+                        <input type="button" id="submit_order" name="submit_order" value="Submit Order" />
+                    </form>
+                </div>
             </div>
             <div class="clear"></div>
         </div>
