@@ -155,11 +155,24 @@ Yum.Basket = ( function() {
     };
 
     /**
+     * getTax
+     * @param price
+     * @returns {number}
+     */
+    this.getTax = function( price ) {
+        var taxCalculator = new Yum.TaxCalculator();
+        return taxCalculator.calculateTax( price );
+
+    };
+
+    /**
      * render
      * Method to generate the contents of the basket for display
      * @param {ProductList} productList
      */
     this.render = function( productList ) {
+        var price = 0.0;
+        var quantity = 0;
         var basket = '<ul>';
         for (var i = 0; i < this.basketItems.length; i++) {
             var product = productList.getProduct( this.basketItems[i].product_item_id );
@@ -170,7 +183,13 @@ Yum.Basket = ( function() {
                    + '</span><span class="add"><a href="#" onclick="addToBasket( ' + this.basketItems[i].product_item_id + ' );return false;">+</a></span>'
                    + '</span></div>'
                    + '</span></li>';
+            price += discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
+            quantity += this.basketItems[i].quantity;
         }
+        var tax = this.getTax( price );
+        price += tax;
+        basket += '<li><span id="tax">&pound;' + tax.toFixed( 2 ) + '</span></li>';
+        basket += '<li><span id="orderTotal">' + price.toFixed( 2 ) + '</span></li>';
         basket += '</ul>';
         return basket;
     };

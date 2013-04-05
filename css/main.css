@@ -180,8 +180,17 @@ body {
     font-size: 0.6em;
 }
 
-#basket_page {
-    
+#basket_page ul {
+    clear: both;
+    list-style-type: none;
+}
+
+#basket_page ul li {
+    position: relative;
+    float: left;
+    display: block;
+    height: 30px;
+    margin: 6px;
 }
 
 .product .order .remove,

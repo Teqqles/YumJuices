@@ -18,23 +18,25 @@ Yum.TaxCalculator = (function() {
     /**
      * @type {number}
      */
-    this.tax = 1 + 0.175;
+    this.tax = 0.175;
 
     /**
      * calculateTax
      * @param price
-     * @returns {number}
+     * @returns {*}
      */
     this.calculateTax = function( price ) {
-        return this.applyTax( price );
+        return this.applyTax( price, this.tax );
     };
 
     /**
      * applyTax
      * @param {number} price
+     * @param {number} tax
      * @returns {number}
      */
-    this.applyTax = function( price ) {
-        return this.tax * price;
+    this.applyTax = function( price, tax ) {
+        return tax * price;
     };
+
 });
