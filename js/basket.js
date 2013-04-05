@@ -171,26 +171,30 @@ Yum.Basket = ( function() {
      * @param {ProductList} productList
      */
     this.render = function( productList ) {
-        var price = 0.0;
-        var quantity = 0;
-        var basket = '<ul>';
-        for (var i = 0; i < this.basketItems.length; i++) {
-            var product = productList.getProduct( this.basketItems[i].product_item_id );
-            basket += '<li><span class="name">' + product.name + '</span><span class="quantity">'
-                   + '<div class="order"><span class="remove"><a href="#" onclick="removeFromBasket( ' + this.basketItems[i].product_item_id + ' );return false;">-</a></span>'
-                   + '<span class="item_order">'
-                   + this.getItemQuantity( this.basketItems[i].product_item_id )
-                   + '</span><span class="add"><a href="#" onclick="addToBasket( ' + this.basketItems[i].product_item_id + ' );return false;">+</a></span>'
-                   + '</span></div>'
-                   + '</span></li>';
-            price += discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
-            quantity += this.basketItems[i].quantity;
+        var basket = '';
+        if ( this.basketItems.length > 0 ) {
+            var price = 0.0;
+            var quantity = 0;
+            basket = '<ul>';
+            for (var i = 0; i < this.basketItems.length; i++) {
+                var product = productList.getProduct( this.basketItems[i].product_item_id );
+                basket += '<li><span class="name">' + product.name + '</span><span class="quantity">'
+                       + '<div class="order"><span class="remove"><a href="#" onclick="removeFromBasket( ' + this.basketItems[i].product_item_id + ' );return false;">-</a></span>'
+                       + '<span class="item_order">'
+                       + this.getItemQuantity( this.basketItems[i].product_item_id )
+                       + '</span><span class="add"><a href="#" onclick="addToBasket( ' + this.basketItems[i].product_item_id + ' );return false;">+</a></span>'
+                       + '</span></div>'
+                       + '</span></li>';
+                price += discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
+                quantity += this.basketItems[i].quantity;
+            }
+            var tax = this.getTax( price );
+            price += tax;
+            basket += '<li><span id="tax">&pound;' + tax.toFixed( 2 ) + '</span></li>';
+            basket += '<li><span id="orderTotal">' + price.toFixed( 2 ) + '</span></li>';
+            basket += '</ul>';
+            basket += '<a id="checkoutButton" href="#" onclick="return pageSorter( \'checkout\' );">Go to Checkout</a>';
         }
-        var tax = this.getTax( price );
-        price += tax;
-        basket += '<li><span id="tax">&pound;' + tax.toFixed( 2 ) + '</span></li>';
-        basket += '<li><span id="orderTotal">' + price.toFixed( 2 ) + '</span></li>';
-        basket += '</ul>';
         return basket;
     };
 });
