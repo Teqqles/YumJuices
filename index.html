@@ -3,7 +3,7 @@
     <head>
         <title></title>
         <meta charset="utf-8" />
-        <link lang="text/css" rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/main.css" />
     </head>
     <body onload="renderPage()">
         <div id="container">
@@ -45,7 +45,7 @@
             <div id="juices_page" class="page">
                 <h2>Juices</h2>
                 <div class="message">
-                    Our purest product, nothing but freshly squeezed juice, straight to your door.  We select only the finest ingredients and add a small amount of sweetener but if you'd rather have your juice without you can select that option when you checkout.
+                    Our purest product, nothing but freshly squeezed juice, straight to your door.  We select only the finest ingredients and add a small amount of sweetener but if you'd rather have your juice without you can select that option when you checkout. <strong>All products on this page are suitable for both vegetarians and vegans.</strong>
                 </div>
                 <div id="juices" class="product"></div>
             </div>
@@ -66,7 +66,7 @@
             <div id="dairyfree_page" class="page">
                 <h2>Dairy-Free</h2>
                 <div class="message">
-                    Want your smoothies without milk?  This page only displays milk-free products so you can be safe in the knowledge that you will be ordering lactose free produce.
+                    Want your smoothies without milk?  This page only displays milk-free products so you can be safe in the knowledge that you will be ordering lactose free produce. <strong>All products on this page are suitable for both vegetarians and vegans.</strong>
                 </div>
                 <div id="dairyfree" class="product"></div>
             </div>
@@ -80,20 +80,42 @@
 
                 <div id="checkout">
                     <form>
-                        <label for="first_name">First Name</label><input id="first_name" name="first_name" type="text" />
-                        <label for="last_name">Last Name</label><input id="last_name" name="last_name" type="text" />
-                        <label for="email_address">Email Address</label><input id="email_address" name="email_address" type="text" />
-                        <label for="telephone">Last Name</label><input id="telephone" name="telephone" type="text" />
-                        <label for="billing_address">Billing Address</label><input id="billing_address" name="billing_address"  type="text" />
-                        <label for="shipping_address">Shipping Address</label><input id="shipping_address" name="shipping_address"  type="text" />
-                        <label for="credit_card_number">Credit Card Number</label><input id="credit_card_number" name="credit_card_number" type="text" />
-                        <input type="button" id="submit_order" name="submit_order" value="Submit Order" />
+                        <label id="label_first_name" for="first_name">First Name</label><input id="first_name" class="example" name="first_name" type="text" title="e.g. John" onblur="displayExampleText(this);" onfocus="hideExampleText(this);" />
+                        <div id="errorDisplay_first_name" class="formHidden">A first name must be supplied</div>
+
+                        <label id="label_last_name" for="last_name">Last Name</label><input id="last_name" class="example" name="last_name" type="text" title="e.g. Smith" onblur="displayExampleText(this);" onfocus="hideExampleText(this);" />
+                        <div id="errorDisplay_last_name" class="formHidden">A last name must be supplied</div>
+
+                        <label id="label_email_address" for="email_address">Email Address</label><input id="email_address" class="example" name="email_address" type="text" title="e.g. john.smith@example.com" onblur="displayExampleText(this);" onfocus="hideExampleText(this);" />
+                        <div id="errorDisplay_email_address" class="formHidden">An e-mail address must be entered for order confirmation</div>
+
+                        <label id="label_telephone" for="telephone">Telephone</label><input id="telephone" class="example" name="telephone" type="text" title="e.g. 5551234" onblur="displayExampleText(this);" onfocus="hideExampleText(this);" />
+                        <div id="errorDisplay_telephone" class="formHidden">A contact telephone number must be supplied. Only numbers are acceptable in this field.</div>
+
+                        <label id="label_billing_address" for="billing_address">Billing Address</label><input id="billing_address" class="example" name="billing_address"  type="text" title="e.g. 1 Letsbee Avenue, London, E1 1A" onblur="displayExampleText(this);" onfocus="hideExampleText(this);" />
+                        <div id="errorDisplay_billing_address" class="formHidden">A billing address for the credit card must be supplied</div>
+
+                        <label id="label_shipping_address" for="shipping_address">Shipping Address (if different)</label><input id="shipping_address" class="example" name="shipping_address"  type="text" title="e.g. 1 Letsbee Avenue, London, E1 1A" onblur="displayExampleText(this);" onfocus="hideExampleText(this);" />
+                        <div id="errorDisplay_shipping_address" class="formHidden"></div>
+
+                        <label id="label_credit_card_number" for="credit_card_number">Credit Card Number</label><input id="credit_card_number" class="example" name="credit_card_number" type="text" title="e.g. 1234567891234567" onblur="displayExampleText(this);" onfocus="hideExampleText(this);" />
+                        <div id="errorDisplay_credit_card_number" class="formHidden">A valid credit card number must be supplied with your order.  Only numbers can be entered in this field, no spaces</div>
+
+                        <input type="button" id="orderButton" class="right" name="submit_order" value="Submit Order" onclick="processOrder();" />
                     </form>
+                </div>
+            </div>
+            <div id="thankyou_page" class="page">
+                <h2>Checkout</h2>
+
+                <div class="message">
+                    Thank you for placing your order.  An order confirmation will be sent to the supplied e-mail address once payment has been taken.
+                    <br />
                 </div>
             </div>
             <div class="clear"></div>
         </div>
-        <div id="copyright">&copy Copyright 2013, David Long</div>
+        <div id="copyright">&copy; Copyright 2013, David Long</div>
         <script type="text/javascript" src="js/item.js"></script>
         <script type="text/javascript" src="js/product.js"></script>
         <script type="text/javascript" src="js/product_list.js"></script>
@@ -101,6 +123,7 @@
         <script type="text/javascript" src="js/tax_calculator.js"></script>
         <script type="text/javascript" src="js/discount_calculator.js"></script>
         <script type="text/javascript" src="js/basket.js"></script>
+        <script type="text/javascript" src="js/form_validation.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>

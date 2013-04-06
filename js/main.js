@@ -14,6 +14,7 @@ Yum.products = new Yum.ProductList( Yum.basket );
 
 function renderPage() {
     showPage( 'home_page' );
+    generateExampleText();
 
     /** Setup our product database **/
     /** juices **/
@@ -46,9 +47,10 @@ function showPage( pageName ) {
     pages.push( 'dairyfree_page' );
     pages.push( 'basket_page' );
     pages.push( 'checkout_page' );
+    pages.push( 'thankyou_page' );
 
-    //hide ordering tools from homepage
-    if ( pageName == 'home_page' ) {
+    //hide ordering tools from homepage, basket and checkout
+    if ( pageName == 'home_page' || pageName == 'basket_page' || pageName == 'checkout_page' || pageName == 'thankyou_page' ) {
         document.getElementById( 'sorter' ).className = "";
     } else {
         document.getElementById( 'sorter' ).className = "visible";
@@ -109,4 +111,47 @@ function removeFromBasket( productId ) {
     var product = Yum.products.getProduct( productId );
     Yum.basket.remove( product );
     renderPageSections();
+}
+
+/** Initialises fields for displaying example text to the user **/
+function generateExampleText() {
+    displayExampleText( document.getElementById( "first_name" ) );
+    displayExampleText( document.getElementById( "last_name" ) );
+    displayExampleText( document.getElementById( "email_address" ) );
+    displayExampleText( document.getElementById( "telephone" ) );
+    displayExampleText( document.getElementById( "billing_address" ) );
+    displayExampleText( document.getElementById( "shipping_address" ) );
+    displayExampleText( document.getElementById( "credit_card_number" ) );
+}
+
+/** Display example text shown on page load and if data is not entered into a field **/
+function displayExampleText( field ) {
+    if ( field.value == field.title || !field.value ) {
+        field.value = field.title;
+        field.className = "example";
+    }
+}
+
+/** Hide example text shown in field before data entry **/
+function hideExampleText( field ) {
+    if ( field.value == field.title ) {
+        field.value = "";
+        field.className = "";
+    }
+}
+
+function processOrder() {
+    var formValidation = new Yum.FormValidation();
+    formValidation.checkValid( document.getElementById( "first_name" ) );
+    formValidation.checkValid( document.getElementById( "last_name" ) );
+    formValidation.checkValid( document.getElementById( "email_address" ) );
+    formValidation.checkValid( document.getElementById( "telephone" ) );
+    formValidation.checkValid( document.getElementById( "billing_address" ) );
+    formValidation.checkValid( document.getElementById( "credit_card_number" ) );
+    if ( formValidation.noErrors ) {
+        //show order completed screen.
+        showPage( 'thankyou_page' );
+        Yum.basket.clearBasket();
+        renderPageSections();
+    }
 }

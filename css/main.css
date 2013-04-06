@@ -187,10 +187,59 @@ body {
 
 #basket_page ul li {
     position: relative;
-    float: left;
     display: block;
-    height: 30px;
+    height: 25px;
+    padding: 4px;
     margin: 6px;
+}
+
+#basket_page ul li.odd {
+    background-color: #fcf6df;
+}
+
+#basket_page ul li.tax {
+    background-color: #fde1d3;
+}
+
+#basket_page ul li#heading {
+    font-weight: bold;
+}
+
+#basket_page ul li .name {
+    display: block;
+    float: left;
+    width: 400px;
+}
+
+#basket_page ul li .amount {
+    display: block;
+    float: right;
+}
+
+#basket_page ul li .order {
+    display: block;
+    float: left;
+    width: 250px;
+}
+
+#basket_page label {
+    padding: 10px;
+}
+
+#checkoutButton, #orderButton {
+    float: right;
+    border: 1px solid #a057cf;
+    background-color: #fae17f;
+    font-size: 0.8em;
+    padding: 5px;
+    margin: 0 6px;
+    color: #000;
+    text-decoration: none;
+}
+
+#checkoutButton:hover, #orderButton:hover {
+    border: 1px solid #6c3ccf;
+    background-color: #fac678;
 }
 
 .product .order .remove,
@@ -206,6 +255,16 @@ body {
     margin: 0 6px;
 }
 
+.product .order .remove:hover,
+.product .order .add:hover,
+.product .order .add_to_basket:hover,
+#basket_page .order .remove:hover,
+#basket_page .order .add:hover,
+#basket_page .order .add_to_basket:hover {
+    border: 1px solid #6c3ccf;
+    background-color: #fac678;
+}
+
 .product .order .remove a,
 .product .order .add a,
 .product .order .add_to_basket a,
@@ -215,6 +274,21 @@ body {
     color: #000;
     text-decoration: none;
     padding: 2px;
+}
+
+#checkout form input {
+    border: 1px solid #000;
+    padding: 3px;
+    margin: 5px;
+    width: 300px;
+}
+
+#checkout form label {
+    clear: both;
+    display: block;
+    float: left;
+    width: 450px;
+    margin: 5px;
 }
 
 #sorter {
@@ -303,3 +377,30 @@ body {
     background-color: #FFEED3;
 }
 
+.right {
+    float: right;
+}
+
+.example {
+    font-style: italic;
+    color: #aaa9ae;
+}
+
+.formHidden {
+    display: none;
+}
+
+.error {
+    color: #ff5f5a;
+}
+
+.formError {
+    display: block;
+    background-color: #ff9168;
+    color: #000;
+    border: 1px solid #000;
+    margin: 0 0 10px 466px;
+    width: 300px;
+    padding: 5px;
+    font-size: 0.8em;
+}

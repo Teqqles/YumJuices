@@ -143,10 +143,11 @@ Yum.Basket = ( function() {
             price += discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
             quantity += this.basketItems[i].quantity;
         }
+
         if ( quantity > 0 ) {
             bubble += '<div id="basket_container">'
                    + '<div id="basket_order">Order Total: &pound;<span id="order_total">' + price.toFixed( 2 ) + '</span><span id="order_items">'
-                   + quantity
+                   + ' ( ' + quantity + ' items ) '
                    + '</span></div>'
                    + '<span id="basket_message">Click the basket icon to view/order.</span>'
                    + '</div>';
@@ -175,27 +176,48 @@ Yum.Basket = ( function() {
         if ( this.basketItems.length > 0 ) {
             var price = 0.0;
             var quantity = 0;
+            var row = 'even';
+            var discountCalculator = new Yum.DiscountCalculator();
             basket = '<ul>';
+            basket += '<li id="heading"><span class="name">Product</span><span class="name">Quantity</span><span class="amount">Price</span></li>';
             for (var i = 0; i < this.basketItems.length; i++) {
                 var product = productList.getProduct( this.basketItems[i].product_item_id );
-                basket += '<li><span class="name">' + product.name + '</span><span class="quantity">'
-                       + '<div class="order"><span class="remove"><a href="#" onclick="removeFromBasket( ' + this.basketItems[i].product_item_id + ' );return false;">-</a></span>'
+                var item_price = discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
+                row = (i + 1) % 2 != 0 ? 'odd' : '';
+                basket += '<li class="' + row + '"><span class="name">' + product.name + '</span><span class="quantity">'
+                       + '<span class="order"><span class="remove"><a href="#" onclick="removeFromBasket( ' + this.basketItems[i].product_item_id + ' );return false;">-</a></span>'
                        + '<span class="item_order">'
                        + this.getItemQuantity( this.basketItems[i].product_item_id )
                        + '</span><span class="add"><a href="#" onclick="addToBasket( ' + this.basketItems[i].product_item_id + ' );return false;">+</a></span>'
-                       + '</span></div>'
-                       + '</span></li>';
-                price += discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
+                       + '</span></span>'
+                       + '</span>'
+                       + '<span class="amount">&pound;' + item_price.toFixed( 2 ) + '</span>'
+                       + '</li>';
+                price += item_price;
                 quantity += this.basketItems[i].quantity;
             }
             var tax = this.getTax( price );
             price += tax;
-            basket += '<li><span id="tax">&pound;' + tax.toFixed( 2 ) + '</span></li>';
-            basket += '<li><span id="orderTotal">' + price.toFixed( 2 ) + '</span></li>';
+            basket += '<li class="tax"><span class="name">Tax (17.5%)</span><span class="amount">&pound;' + tax.toFixed( 2 ) + '</span></li>';
+            basket += '<li><span class="name">Order Total</span><span class="amount">&pound;' + price.toFixed( 2 ) + '</span></li>';
             basket += '</ul>';
-            basket += '<a id="checkoutButton" href="#" onclick="return pageSorter( \'checkout\' );">Go to Checkout</a>';
+            basket += '<form>';
+            basket += '<label for="noaddedsugar">No added sugar</label><input type="checkbox" id="noaddedsugar" />';
+            basket += '<label for="noaddedpreservatives">No added preservatives</label><input type="checkbox" id="noaddedpreservatives" />';
+            basket += '</form>';
+            basket += '<a id="checkoutButton" href="#" onclick="return showPage( \'checkout_page\' );">Go to Checkout</a>';
+        } else {
+            basket = '<div class="message">You have no items in your basket.  Visit the product pages via the main menu and add items to your basket</div>';
         }
         return basket;
+    };
+
+    /**
+     * clearBasket
+     */
+    this.clearBasket = function () {
+        //setting the length in splice clears the original content, because references exist elsewhere we cannot issue = []
+        this.basketItems.splice(0, this.basketItems.length);
     };
 });
 
