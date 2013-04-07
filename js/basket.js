@@ -140,7 +140,7 @@ Yum.Basket = ( function() {
         var bubble = '';
         var discountCalculator = new Yum.DiscountCalculator();
         for (var i = 0; i < this.basketItems.length; i++) {
-            price += discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
+            price += discountCalculator.calculateCost( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
             quantity += this.basketItems[i].quantity;
         }
 
@@ -182,7 +182,7 @@ Yum.Basket = ( function() {
             basket += '<li id="heading"><span class="name">Product</span><span class="name">Quantity</span><span class="amount">Price</span></li>';
             for (var i = 0; i < this.basketItems.length; i++) {
                 var product = productList.getProduct( this.basketItems[i].product_item_id );
-                var item_price = discountCalculator.calculateDiscount( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
+                var item_price = discountCalculator.calculateCost( this.basketItems[i], productList.getProduct( this.basketItems[i].product_item_id ) );
                 row = (i + 1) % 2 != 0 ? 'odd' : '';
                 basket += '<li class="' + row + '"><span class="name">' + product.name + '</span><span class="quantity">'
                        + '<span class="order"><span class="remove"><a href="#" onclick="removeFromBasket( ' + this.basketItems[i].product_item_id + ' );return false;">-</a></span>'
@@ -196,8 +196,18 @@ Yum.Basket = ( function() {
                 price += item_price;
                 quantity += this.basketItems[i].quantity;
             }
+
+            //calculate discount
+
+            var discount = discountCalculator.calculateDiscount( quantity, price );
+            basket += '<li class="discount"><span class="name">Discount (12.5%)</span><span class="amount">&pound;' + discount.toFixed( 2 ) + '</span></li>';
+
+            //subtract discount from basket price
+            price -= discount;
+
             var tax = this.getTax( price );
             price += tax;
+
             basket += '<li class="tax"><span class="name">Tax (17.5%)</span><span class="amount">&pound;' + tax.toFixed( 2 ) + '</span></li>';
             basket += '<li><span class="name">Order Total</span><span class="amount">&pound;' + price.toFixed( 2 ) + '</span></li>';
             basket += '</ul>';

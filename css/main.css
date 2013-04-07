@@ -197,6 +197,10 @@ body {
     background-color: #fcf6df;
 }
 
+#basket_page ul li.discount {
+    background-color: #dbef97;
+}
+
 #basket_page ul li.tax {
     background-color: #fde1d3;
 }

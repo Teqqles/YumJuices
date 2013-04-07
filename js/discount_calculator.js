@@ -18,22 +18,32 @@ Yum.DiscountCalculator = (function() {
     /**
      * @type {number}
      */
-    this.discount = 1 - 0.125;
+    this.discount = 0.125;
 
     /**
-     * calculateDiscount
+     * calculateCost
      * @param {Yum.Item} item
      * @param {Yum.Project} product
      * @returns {number}
-
      */
-    this.calculateDiscount = function( item, product ) {
+    this.calculateCost = function( item, product ) {
         var price = 0.0;
         price = item.quantity * product.price;
-        if ( item.quantity >= 5 ) {
-            price = this.applyDiscount( price );
-        }
         return price;
+    };
+
+    /**
+     * calculateDiscount
+     * @param {nuumber} quantity
+     * @param {number} price
+     * @return {number}
+     */
+    this.calculateDiscount = function( quantity, price ) {
+        var discount = 0.0;
+        if ( quantity >= 5 ) {
+            discount = this.applyDiscount( price );
+        }
+        return discount;
     };
 
     /**
