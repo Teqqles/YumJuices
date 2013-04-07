@@ -4,7 +4,7 @@
  * Author: David Long (dlong06)
  **/
 
-/** namespace to product against third-party libraries for the Yum product
+/** namespace to protect against third-party libraries for the Yum product
  * @namespace Yum
  */
 var Yum = window.Yum || {};
@@ -16,14 +16,21 @@ var Yum = window.Yum || {};
 Yum.TaxCalculator = (function() {
 
     /**
+     * tax
+     *
+     * Taxation at 17.5%.  Added as a type to simplify change.
+     *
      * @type {number}
      */
     this.tax = 0.175;
 
     /**
      * calculateTax
-     * @param price
-     * @returns {*}
+     *
+     * Calculates the tax rate and returns the result.
+     *
+     * @param {number} price
+     * @returns {number}
      */
     this.calculateTax = function( price ) {
         return this.applyTax( price, this.tax );
@@ -31,6 +38,9 @@ Yum.TaxCalculator = (function() {
 
     /**
      * applyTax
+     *
+     * Applies tax rate to the price of goods
+     *
      * @param {number} price
      * @param {number} tax
      * @returns {number}

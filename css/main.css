@@ -3,18 +3,21 @@
     Author: David Long (dlong06)
 */
 
+/* remove any default padding, margin and borders */
 * {
     margin: 0;
     padding: 0;
     border: 0; /* removes image borders from IE */
 }
 
+/* provide a default font, maximize page body and give a light yellow background */
 body {
     font-family: sans-serif;
     width: 100%;
     background-color: #fcf5da;
 }
 
+/* our page container, with a 960px layout and centered white container */
 #container {
     width: 960px;
     margin: 20px auto 0 auto;
@@ -23,12 +26,12 @@ body {
     min-height: 600px;
 }
 
+/* page header, displays the juice background, basket and  company logo */
 #banner {
     position: relative;
     height: 65px;
     background: #fae17f url('../images/banner_bg.png') no-repeat left top;
 }
-
 
 #banner #logo {
     float: left;
@@ -40,11 +43,13 @@ body {
     margin: 9px 9px 0 0;
 }
 
+/* remove underline from basket text */
 #basket_link {
     text-decoration: none;
     color: #000;
 }
 
+/* basket speech bubble, highlights to the user the content and cost of the basket */
 #basket_content {
     position: absolute;
     right: 50px;
@@ -66,6 +71,7 @@ body {
     font-weight: bold;
 }
 
+/* product menu with lighter yellow background than header */
 #menu {
     margin: 2px 0 13px 0;
     height: 24px;
@@ -118,14 +124,17 @@ body {
     background-image: url("../images/menu_gluten_free.png");
     width: 126px;
 }
+
 #menu ul li a#menu_gluten_free:hover {
     background-image: url("../images/menu_gluten_free_hover.png");
 }
 
+/* page separator for section content, starts hidden */
 .page {
     display: none;
 }
 
+/* called by javascript page selector */
 .page.visible {
     display: inherit;
 }
@@ -136,6 +145,8 @@ body {
     color: #ff9168;
 }
 
+/* product list, for pages this shows as a block of products, this layout has been made list based for future display
+  flexibility */
 .product ul {
     clear: both;
     list-style-type: none;
@@ -160,11 +171,13 @@ body {
     margin-bottom: 5px;
 }
 
+/* when the product is in stock, the quantity is shown in green */
 .product .quantity {
     color: #98b929;
     font-weight: bold;
 }
 
+/* when the product is not stocked the text is displayed as red to inform the user */
 .product .lowstock {
     color: #ff5f5a;
 }
@@ -180,6 +193,7 @@ body {
     font-size: 0.6em;
 }
 
+/* The basket page is displayed as a list of items */
 #basket_page ul {
     clear: both;
     list-style-type: none;
@@ -197,14 +211,17 @@ body {
     background-color: #fcf6df;
 }
 
+/* discount is highlighted in green */
 #basket_page ul li.discount {
     background-color: #dbef97;
 }
 
+/* tax is highlighted in red */
 #basket_page ul li.tax {
     background-color: #fde1d3;
 }
 
+/* basket headers are shown bold */
 #basket_page ul li#heading {
     font-weight: bold;
 }
@@ -229,6 +246,8 @@ body {
 #basket_page label {
     padding: 10px;
 }
+
+/* Buttons */
 
 #checkoutButton, #orderButton {
     float: right;
@@ -280,6 +299,8 @@ body {
     padding: 2px;
 }
 
+/* Checkout form elements */
+
 #checkout form input {
     border: 1px solid #000;
     padding: 3px;
@@ -294,6 +315,8 @@ body {
     width: 450px;
     margin: 5px;
 }
+
+/* Ordering menu displayed on product pages */
 
 #sorter {
     display: none;
@@ -322,6 +345,7 @@ body {
     color: #ff9168;
 }
 
+/* Utility class to remove floats */
 .clear {
     clear: both;
 }
@@ -368,6 +392,8 @@ body {
     background: #fff url('../images/product/forestfruits.jpg') no-repeat left top;
 }
 
+/* Copyright notice */
+
 #copyright {
     clear: both;
     margin: 10px;
@@ -375,15 +401,19 @@ body {
     font-size: 0.7em;
 }
 
+/* Message banner, for conveying important information */
 .message {
     padding: 5px;
     margin: 5px;
     background-color: #FFEED3;
 }
 
+/* Utility class for floating right */
 .right {
     float: right;
 }
+
+/* Form handling styles */
 
 .example {
     font-style: italic;

@@ -6,7 +6,7 @@
  * Author: David Long (dlong06)
  **/
 
-/** namespace to product against third-party libraries for the Yum product
+/** namespace to protect against third-party libraries for the Yum product
  * @namespace Yum
  */
 var Yum = window.Yum || {};
@@ -25,7 +25,10 @@ Yum.Basket = ( function() {
 
     /**
      * add
+     *
      * Method for adding product to the basket.  Translates product to item and then stores in basket.
+     *
+     * @public
      * @param {Yum.Product} productItem
      * @return {Boolean}
      */
@@ -41,7 +44,10 @@ Yum.Basket = ( function() {
 
     /**
      * remove
+     *
      * Method for removing item, or quantity from the basket
+     *
+     * @public
      * @param {Yum.Product} productItem
      * @return {Boolean}
      */
@@ -58,7 +64,10 @@ Yum.Basket = ( function() {
 
     /**
      * convertProductToItem
+     *
      * Transfers relevant data to compact basket item
+     *
+     * @public
      * @param {Yum.Product} product
      * @returns {Yum.Item}
      */
@@ -71,7 +80,10 @@ Yum.Basket = ( function() {
 
     /**
      * addItemToBasket
+     *
      * increases quantity or adds specified item to basket
+     *
+     * @public
      * @param {Yum.Item} item
      */
     this.addItemToBasket = function( item ) {
@@ -89,7 +101,10 @@ Yum.Basket = ( function() {
 
     /**
      * removeItemFromBasket
+     *
      * reduces the quantity or removes specified item from basket. Notifies whether product has been removed for stock control
+     *
+     * @public
      * @param {Yum.Item} item
      */
     this.removeItemFromBasket = function( item ) {
@@ -108,6 +123,10 @@ Yum.Basket = ( function() {
 
     /**
      * getItemQuantity
+     *
+     * Finds item by ID and returns the number found within the basket
+     *
+     * @public
      * @param {Number} itemId
      * @return {Number}
      */
@@ -122,6 +141,10 @@ Yum.Basket = ( function() {
 
     /**
      * doItemsMatch
+     *
+     * Checks to see if items match each other
+     *
+     * @public
      * @param item
      * @param matchingItem
      * @return {Boolean}
@@ -132,7 +155,12 @@ Yum.Basket = ( function() {
 
     /**
      * renderBubble
+     *
+     * Renders the basket speech bubble
+     *
+     * @public
      * @param {Yum.ProductList} productList
+     * @return {String}
      */
     this.renderBubble = function( productList ) {
         var price = 0.0;
@@ -157,6 +185,10 @@ Yum.Basket = ( function() {
 
     /**
      * getTax
+     *
+     * Utility for generating taxation amount due
+     *
+     * @public
      * @param price
      * @returns {number}
      */
@@ -168,7 +200,10 @@ Yum.Basket = ( function() {
 
     /**
      * render
-     * Method to generate the contents of the basket for display
+     *
+     * Method to generate the contents of the basket for display once a user clicks the basket
+     *
+     * @public
      * @param {ProductList} productList
      */
     this.render = function( productList ) {
@@ -216,7 +251,8 @@ Yum.Basket = ( function() {
             basket += '<label for="noaddedpreservatives">No added preservatives</label><input type="checkbox" id="noaddedpreservatives" />';
             basket += '</form>';
             basket += '<a id="checkoutButton" href="#" onclick="return showPage( \'checkout_page\' );">Go to Checkout</a>';
-        } else {
+        } else { //alternative display if no items are found in the basket
+
             basket = '<div class="message">You have no items in your basket.  Visit the product pages via the main menu and add items to your basket</div>';
         }
         return basket;
@@ -224,9 +260,13 @@ Yum.Basket = ( function() {
 
     /**
      * clearBasket
+     *
+     * Removes all items from the basket
+     *
+     * @public
      */
     this.clearBasket = function () {
-        //setting the length in splice clears the original content, because references exist elsewhere we cannot issue = []
+        //setting the length in splice clears the original content, because references exist elsewhere we cannot use = []
         this.basketItems.splice(0, this.basketItems.length);
     };
 });

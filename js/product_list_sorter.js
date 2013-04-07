@@ -6,7 +6,7 @@
  * Author: David Long (dlong06)
  **/
 
-/** namespace to product against third-party libraries for the Yum product
+/** namespace to protect against third-party libraries for the Yum product
  * @namespace Yum
  */
 var Yum = window.Yum || {};
@@ -20,12 +20,22 @@ Yum.lastSort = 'popularity';
  * @class ProductListSorter
  */
 Yum.ProductListSorter = (function( productList ) {
+
+    /** productList
+     *
+     * Container of our productlist array
+     *
+     * @type {Array}
+     */
     this.products = productList;
 
     /**
      * name
+     *
      * Sort by name, a custom function to sort products by name.  Due to the structure of the content within the array
      * the default sort is not valid for this filter.
+     *
+     * @public
      * @returns {Array}
      */
     this.name = function() {
@@ -39,18 +49,39 @@ Yum.ProductListSorter = (function( productList ) {
         return this.products;
     };
 
+    /**
+     * priceAscending
+     *
+     * Sorts the productlist by lowest price first
+     *
+     * @return {Array}
+     */
     this.priceAscending = function() {
         this.products.sort(function(a,b){ return a.price - b.price });
         Yum.lastSort = 'lowprice';
         return this.products;
     };
 
+    /**
+     * priceDescending
+     *
+     * Sorts the productlist by highest price first
+     *
+     * @return {Array}
+     */
     this.priceDescending = function() {
         this.products.sort(function(a,b){ return b.price - a.price });
         Yum.lastSort = 'highprice';
         return this.products;
     };
 
+    /**
+     * popularity
+     *
+     * Sorts the productlist by highest selling items
+     *
+     * @return {Array}
+     */
     this.popularity = function() {
         this.products.sort(function(a,b){ return a.quantity - b.quantity });
         Yum.lastSort = 'popularity';

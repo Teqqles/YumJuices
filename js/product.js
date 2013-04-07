@@ -6,21 +6,25 @@
  * Author: David Long (dlong06)
  **/
 
-/** namespace to product against third-party libraries for the Yum product
+/** namespace to protect against third-party libraries for the Yum product
  * @namespace Yum
  */
 var Yum = window.Yum || {};
 
 /**
- * @name Yum.Product
- * Product type, encapsulation of Yum Juices products
+ * Yum.Product
+ *
+ * Product type, encapsulation of Yum Juices products.  A wrapper for our complex data type
+ *
  * @class Product
  * @constructor
+ * @param id
  * @param name
  * @param css
  * @param price
  * @param quantity
- * @param id
+ * @param ingredients
+ *
  */
 Yum.Product = (function( id, name, css, price, quantity, ingredients ) {
     this.id       = id;
@@ -34,10 +38,24 @@ Yum.Product = (function( id, name, css, price, quantity, ingredients ) {
     this.gluten = false;
     this.dairy = false;
 
+    /**
+     * addStock
+     *
+     * Used to increment stock when an item is removed from a users basket
+     *
+     * @public
+     */
     this.addStock = function() {
         this.quantity++;
     };
 
+    /**
+     * removeStock
+     *
+     * Used to decrement stock when an item is added to a users basket
+     *
+     * @public
+     */
     this.removeStock = function() {
         this.quantity--;
     };
@@ -45,13 +63,17 @@ Yum.Product = (function( id, name, css, price, quantity, ingredients ) {
 });
 
 /**
- * newSmoothie - factory function to create gluten/non-gluten non-dairy smoothies
+ * newSmoothie
+ *
+ * factory function to create gluten/non-gluten non-dairy smoothies
+ *
  * @param id
  * @param name
  * @param css
  * @param price
  * @param quantity
  * @param gluten
+ * @param ingredients
  * @returns {Yum.Product}
  */
 function newSmoothie( id, name, css, price, quantity, gluten, ingredients ) {
@@ -62,12 +84,16 @@ function newSmoothie( id, name, css, price, quantity, gluten, ingredients ) {
 }
 
 /**
- * newMilkSmoothie - factory function to create gluten & dairy smoothies
+ * newMilkSmoothie
+ *
+ * factory function to create gluten & dairy smoothies
+ *
  * @param id
  * @param name
  * @param css
  * @param price
  * @param quantity
+ * @param ingredients
  * @returns {Yum.Product}
  */
 function newMilkSmoothie( id, name, css, price, quantity, ingredients ) {

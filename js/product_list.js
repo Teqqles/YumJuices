@@ -6,7 +6,7 @@
  * Author: David Long (dlong06)
  **/
 
-/** namespace to product against third-party libraries for the Yum product
+/** namespace to protect against third-party libraries for the Yum product
  * @namespace Yum
  */
 var Yum = window.Yum || {};
@@ -27,7 +27,10 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * addProduct
+     *
      * Storage method for adding items to the stock inventory
+     *
+     * @public
      * @param {Yum.Product} product
      */
     this.addProduct = function( product ) {
@@ -36,8 +39,12 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * getProduct
+     *
+     * Retrieves a product object based on id
+     *
+     * @public
      * @param productId
-     * @return {*}
+     * @return {Yum.Product|null}
      */
     this.getProduct = function( productId ) {
         for( var i = 0; i < this.products.length; i++ ) {
@@ -50,6 +57,10 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * filterByCategory
+     *
+     * Filter based on product category. e.g. juices, smoothies.  More categories can be added at a later date.
+     *
+     * @public
      * @param category
      * @returns {Array}
      */
@@ -66,6 +77,9 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * filterByGlutenFree
+     *
+     *
+     * @public
      * @returns {Array}
      */
     this.filterByGlutenFree = function() {
@@ -80,6 +94,10 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * filterTopSellers
+     *
+     * Used on the homepage
+     *
+     * @public
      * @param numberOfSellers
      * @return {Array}
      */
@@ -94,6 +112,8 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * filterByDairyFree
+     *
+     * @public
      * @returns {Array}
      */
     this.filterByDairyFree = function() {
@@ -108,6 +128,10 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * render
+     *
+     * Main rendering module, selects the stock item and builds the layout for displaying the product.
+     *
+     * @public
      * @param {Array} stock
      * @returns {string}
      */
@@ -136,6 +160,8 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * renderStockLevel
+     *
+     * @public
      * @return {String}
      * @param {Number} quantity
      */
@@ -160,6 +186,8 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * renderBasketControls
+     *
+     * @public
      * @param productId
      * @return {String}
      */
@@ -173,8 +201,12 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * renderCategoryStock
-     * Method to generate the contents of the basket for display
+     *
+     * Method to generate category stock content for pages
+     *
+     * @public
      * @param category
+     * @return {String}
      */
     this.renderCategoryStock = function( category ) {
         var stock = this.filterByCategory( category );
@@ -183,7 +215,9 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * renderGlutenFreeStock
-     * Method to generate the contents of the basket for display
+     *
+     * @public
+     * @return {String}
      */
     this.renderGlutenFreeStock = function() {
         var stock = this.filterByGlutenFree();
@@ -192,7 +226,9 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * renderDairyFreeStock
-     * Method to generate the contents of the basket for display
+     *
+     * @public
+     * @return {String}
      */
     this.renderDairyFreeStock = function() {
         var stock = this.filterByDairyFree();
@@ -201,7 +237,11 @@ Yum.ProductList = (function( basket ) {
 
     /**
      * renderTopSellers
-     * Method to generate the contents of the homepage top sellers for display
+     *
+     * Used only on the homepage
+     *
+     * @public
+     * @return {String}
      */
     this.renderTopSellers = function() {
         var stock = this.filterTopSellers( 3 );

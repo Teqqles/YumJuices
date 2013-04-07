@@ -1,17 +1,28 @@
 /**
+ * Yum Juices
  *
  * Author: David Long (dlong06)
+ *
+ * Page setup and global functions used to call object-oriented and namespaced code
  **/
 
 
-/** namespace to product against third-party libraries for the Yum product
+/** namespace to protect against third-party libraries for the Yum product
  * @namespace Yum
  */
 var Yum = window.Yum || {};
 
+/**
+ * basket and product list for the site visitor
+ */
 Yum.basket   = new Yum.Basket();
 Yum.products = new Yum.ProductList( Yum.basket );
 
+/**
+ * renderPage
+ *
+ * Utility called on page load which defines the Yum products and displays the homepage to the user.
+ */
 function renderPage() {
     showPage( 'home_page' );
     generateExampleText();
@@ -35,9 +46,16 @@ function renderPage() {
     Yum.products.addProduct( newSmoothie( 12, 'Forest Fruits', 'forestfruits', 15.99, 10, false, "Blackberries, Cherries, Colouring, Sweeteners, Preservatives" ) );
 
     pageSorter( 'popularity' );
-
 }
 
+/**
+ * showPage
+ *
+ * Utility function for selecting an individual page to view within the website.
+ *
+ * @param pageName
+ * @return {Boolean}
+ */
 function showPage( pageName ) {
     var pages = [];
     pages.push( 'home_page' );
@@ -65,6 +83,14 @@ function showPage( pageName ) {
     return false; //stop the hyperlink from redirecting to another page
 }
 
+/**
+ * pageSorter
+ *
+ * Function for re-ordering page content (uses Yum.ProductListSorter)
+ *
+ * @param sortBy
+ * @return {Boolean}
+ */
 function pageSorter( sortBy ) {
     // do not update the product array unless we change ordering.
     if ( sortBy != Yum.lastSort ) {
@@ -91,6 +117,11 @@ function pageSorter( sortBy ) {
     return false; //stop the hyperlink from redirecting to another page
 }
 
+/**
+ * renderPageSections
+ *
+ * Defines the content for all page sections by calling the respective object methods.
+ */
 function renderPageSections() {
     document.getElementById( 'basket' ).innerHTML = Yum.basket.render( Yum.products );
     document.getElementById( 'basket_content').innerHTML = Yum.basket.renderBubble( Yum.products );
@@ -101,19 +132,33 @@ function renderPageSections() {
     document.getElementById( 'home' ).innerHTML = Yum.products.renderTopSellers();
 }
 
+/**
+ * addToBasket
+ *
+ * Global wrapper for the Yum.Basket.add method
+ * @param productId
+ */
 function addToBasket( productId ) {
     var product = Yum.products.getProduct( productId );
     Yum.basket.add( product );
     renderPageSections();
 }
 
+/**
+ * removeFromBasket
+ *
+ * Global wrapper for the Yum.Basket.remove method
+ * @param productId
+ */
 function removeFromBasket( productId ) {
     var product = Yum.products.getProduct( productId );
     Yum.basket.remove( product );
     renderPageSections();
 }
 
-/** Initialises fields for displaying example text to the user **/
+/** generateExampleText
+ *
+ * Initialises fields for displaying example text to the user **/
 function generateExampleText() {
     displayExampleText( document.getElementById( "first_name" ) );
     displayExampleText( document.getElementById( "last_name" ) );
@@ -124,7 +169,12 @@ function generateExampleText() {
     displayExampleText( document.getElementById( "credit_card_number" ) );
 }
 
-/** Display example text shown on page load and if data is not entered into a field **/
+/** displayExampleText
+ *
+ * Display example text shown on page load and if data is not entered into a field
+ *
+ * @param field
+ **/
 function displayExampleText( field ) {
     if ( field.value == field.title || !field.value ) {
         field.value = field.title;
@@ -132,7 +182,12 @@ function displayExampleText( field ) {
     }
 }
 
-/** Hide example text shown in field before data entry **/
+/** hideExampleText
+ *
+ * Hide example text shown in field before data entry
+ *
+ * @param field
+ **/
 function hideExampleText( field ) {
     if ( field.value == field.title ) {
         field.value = "";
@@ -140,6 +195,11 @@ function hideExampleText( field ) {
     }
 }
 
+/**
+ * processOrder
+ *
+ * Validates the customer order, showing errors or sending them to the confirmation page if no error found
+ */
 function processOrder() {
     var formValidation = new Yum.FormValidation();
     formValidation.checkValid( document.getElementById( "first_name" ) );
